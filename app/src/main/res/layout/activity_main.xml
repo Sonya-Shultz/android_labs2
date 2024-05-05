@@ -1,25 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    android:weightSum="100"
+    >
 
-    <Button
-        android:id="@+id/btn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:padding="50dp"
-        android:backgroundTint="@color/teal_200"
-        android:onClick="sendText"
-        android:text="@string/btn_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="UsingOnClickInXml" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="75"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:weightSum="100"
+        >
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="match_parent"
+            android:textColor="@color/black"
+            android:background="@color/teal_200"
+            android:text="@string/btn_name"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:layout_weight="20"
+            tools:ignore="NestedWeights" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="22"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:weightSum="22"
+            >
+            <Button
+                android:id="@+id/btn2"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:background="@color/teal_200"
+                android:text="btn2"
+                android:layout_height="0dp"
+                android:layout_margin="0dp"
+                android:layout_weight="20"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="22"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:weightSum="22"
+            >
+            <Button
+                android:id="@+id/btn3"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:background="@color/teal_200"
+                android:text="btn3"
+                android:layout_height="0dp"
+                android:layout_margin="0dp"
+                android:layout_weight="20"/>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="22"
+                android:orientation="vertical"
+                android:gravity="bottom"
+                android:weightSum="22"
+                >
+                <Button
+                android:id="@+id/btn4"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:background="@color/teal_200"
+                android:text="btn4"
+                android:layout_height="0dp"
+                android:layout_margin="0dp"
+                android:layout_weight="20"/>
+            </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
