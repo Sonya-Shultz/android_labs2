@@ -7,19 +7,23 @@ import java.util.Locale
 class DatabaseManager(context: Context) {
     private val dbHelper = MyDatabaseHelper(context)
 
-    fun insertData(name: String, date: String) {
+    fun insertData(name: String, surname: String, lastname: String, date: String) {
         val db = dbHelper.writableDatabase
         val values = ContentValues()
         values.put(MyDatabaseHelper.COLUMN_NAME, name)
+        values.put(MyDatabaseHelper.COLUMN_SURNAME, surname)
+        values.put(MyDatabaseHelper.COLUMN_LASTNAME, lastname)
         values.put(MyDatabaseHelper.COLUMN_DATE, date)
         db.insert(MyDatabaseHelper.TABLE_NAME, null, values)
     }
 
-    fun insertData(name: String) {
+    fun insertData(name: String, surname: String, lastname: String) {
         val date = generateCurrentDate()
         val db = dbHelper.writableDatabase
         val values = ContentValues()
         values.put(MyDatabaseHelper.COLUMN_NAME, name)
+        values.put(MyDatabaseHelper.COLUMN_SURNAME, surname)
+        values.put(MyDatabaseHelper.COLUMN_LASTNAME, lastname)
         values.put(MyDatabaseHelper.COLUMN_DATE, date)
         db.insert(MyDatabaseHelper.TABLE_NAME, null, values)
     }
@@ -27,7 +31,7 @@ class DatabaseManager(context: Context) {
     fun insertDataAtStart(count: Int){
         dbHelper.deleteAllData(dbHelper.writableDatabase)
         for (i in 1..count) {
-            insertData("Fake$i Full$i Name$i", generateCurrentDate())
+            insertData("Fake$i", "Full$i", "Name$i", generateCurrentDate())
         }
     }
 
@@ -36,7 +40,12 @@ class DatabaseManager(context: Context) {
         val db = dbHelper.readableDatabase
         val cursor = db.query(
             MyDatabaseHelper.TABLE_NAME,
-            arrayOf(MyDatabaseHelper.COLUMN_ID, MyDatabaseHelper.COLUMN_NAME, MyDatabaseHelper.COLUMN_DATE),
+            arrayOf(
+                MyDatabaseHelper.COLUMN_ID,
+                MyDatabaseHelper.COLUMN_NAME,
+                MyDatabaseHelper.COLUMN_SURNAME,
+                MyDatabaseHelper.COLUMN_LASTNAME,
+                MyDatabaseHelper.COLUMN_DATE),
             null, null, null, null, null
         )
 
@@ -45,6 +54,8 @@ class DatabaseManager(context: Context) {
                 val groupmate = Groupmate(
                     cursor.getInt(cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_ID)),
                     cursor.getString(cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_NAME)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_SURNAME)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_LASTNAME)),
                     cursor.getString(cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_DATE))
                 )
                 groupmates.add(groupmate)
@@ -78,12 +89,14 @@ class DatabaseManager(context: Context) {
         return lastId
     }
 
-    fun updateLastRecord(name: String): Boolean {
+    fun updateLastRecord(name: String, surname: String, lastname: String): Boolean {
         val lastId = getLastRecordId() ?: return false
         val db = dbHelper.writableDatabase
         val values = ContentValues()
         val date = generateCurrentDate()
         values.put(MyDatabaseHelper.COLUMN_NAME, name)
+        values.put(MyDatabaseHelper.COLUMN_SURNAME, surname)
+        values.put(MyDatabaseHelper.COLUMN_LASTNAME, lastname)
         values.put(MyDatabaseHelper.COLUMN_DATE, date)
 
         val rowsAffected = db.update(
@@ -96,4 +109,4 @@ class DatabaseManager(context: Context) {
     }
 }
 
-data class Groupmate(val id: Int, val name: String, val date: String)
+data class Groupmate(val id: Int, val name: String, val surname: String, val lastname: String, val date: String)

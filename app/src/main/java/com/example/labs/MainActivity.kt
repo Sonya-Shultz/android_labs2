@@ -40,12 +40,12 @@ class MainActivity : AppCompatActivity() {
 
     fun addRecord(view: View) {
         val randNumber = Random.nextInt(0, 100)
-        databaseManager.insertData("New$randNumber Name$randNumber")
-        Toast.makeText(this, "Added new record: New$randNumber Name$randNumber", Toast.LENGTH_SHORT).show()
+        databaseManager.insertData("Name$randNumber", "Surname$randNumber", "LastName$randNumber")
+        Toast.makeText(this, "Added new record: Name$randNumber Surname$randNumber LastName$randNumber", Toast.LENGTH_SHORT).show()
     }
 
     fun changeLast(view: View) {
-        databaseManager.updateLastRecord("Petrenko Petro Petrovych")
+        databaseManager.updateLastRecord("Petro", "Petrenko","Petrovych")
         Toast.makeText(this, "Changed last record!", Toast.LENGTH_SHORT).show()
     }
 

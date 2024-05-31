@@ -6,10 +6,12 @@ class MyDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NA
 
     companion object {
         private const val DATABASE_NAME = "mydatabase.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
         const val TABLE_NAME = "groupmates"
         const val COLUMN_ID = "id"
-        const val COLUMN_NAME = "full_name"
+        const val COLUMN_NAME = "name"
+        const val COLUMN_SURNAME = "surname"
+        const val COLUMN_LASTNAME = "lastname"
         const val COLUMN_DATE = "date"
     }
 
@@ -17,6 +19,8 @@ class MyDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NA
         val CREATE_TABLE = ("CREATE TABLE " + TABLE_NAME + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_NAME + " TEXT,"
+                + COLUMN_SURNAME + " TEXT,"
+                + COLUMN_LASTNAME + " TEXT,"
                 + COLUMN_DATE + " TEXT" + ")")
         db.execSQL(CREATE_TABLE)
     }

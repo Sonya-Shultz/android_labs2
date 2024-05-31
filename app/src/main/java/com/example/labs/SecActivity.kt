@@ -25,7 +25,7 @@ class SecActivity: AppCompatActivity() {
 
     private fun buildGrid(users: List<Groupmate>) {
         // Add headers
-        val headers = listOf("ID", "Name", "Date")
+        val headers = listOf("ID", "Name", "Surname", "Lastname", "Date")
         for (header in headers) {
             val textView = createTextView(header, true)
             gridLayout.addView(textView)
@@ -35,9 +35,13 @@ class SecActivity: AppCompatActivity() {
         for (user in users) {
             val idTextView = createTextView(user.id.toString(), false)
             val nameTextView = createTextView(user.name, false)
+            val surnameTextView = createTextView(user.surname, false)
+            val lastnameTextView = createTextView(user.lastname, false)
             val dateTextView = createTextView(user.date, false)
             gridLayout.addView(idTextView)
             gridLayout.addView(nameTextView)
+            gridLayout.addView(surnameTextView)
+            gridLayout.addView(lastnameTextView)
             gridLayout.addView(dateTextView)
         }
     }
